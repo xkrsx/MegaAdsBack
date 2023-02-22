@@ -58,17 +58,21 @@ export class AdRecord implements AdEntity {
     async insert(): Promise<string> {
         if (!this.id) {
             this.id = uuid();
+        } else {
+            throw new Error('Cannot insert this ad - it already exists.');
         }
 
-        await pool.execute("INSERT INTO `ads` VALUES (:id, :name, :description, :price, :url, :lat, :lon)", {
-            id: this.id,
-            name: this.name,
-            description: this.description,
-            price: this.price,
-            url: this.url,
-            lat: this.lat,
-            lon: this.lon,
-        });
+        await pool.execute("INSERT INTO `ads` (`id`, `name`, `description`, `price`, `url`, `lat`, `lon`) VALUES (:id, :name, :description, :price, :url, :lat, :lon)", this
+            // {
+            //     id: this.id,
+            //     name: this.name,
+            //     description: this.description,
+            //     price: this.price,
+            //     url: this.url,
+            //     lat: this.lat,
+            //     lon: this.lon,
+            // }
+        );
 
         return this.id;
     }
