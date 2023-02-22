@@ -12,7 +12,7 @@ const defaultObject = {
 };
 
 afterAll(async () => {
-    await pool.execute('DELETE FROM `ads` WHERE `name` = "%TEST%"');
+    await pool.execute('DELETE FROM `ads` WHERE `name` LIKE "%[TEST]%"');
     await pool.end();
 })
 
@@ -25,7 +25,7 @@ test('AdRecord returns data from database for one entry.', async () => {
 })
 
 test('AdRecord.getOne returns null from database for unexisting entry.', async () => {
-    const ad = await AdRecord.getOne('abcd');
+    const ad = await AdRecord.getOne('abcdefghizzzzz');
 
     expect(ad).toBeNull();
 });
