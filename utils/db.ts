@@ -4,7 +4,7 @@ export const pool = createPool({
     host: 'localhost',
     user: 'root',
     password: 'root',
-    database: 'megak_megaads',
+    database: 'megak_ads',
     namedPlaceholders: true,
     decimalNumbers: true,
     socketPath: '/Applications/MAMP/tmp/mysql/mysql.sock',
